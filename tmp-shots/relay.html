@@ -1,6 +1,0 @@
-<!doctype html><meta charset="utf-8"><title>relay</title>
-<script>
-const files=['01-title.png','02-campaign.png','03-cosmetics.png','04-leaderboard.png','ipad/01-title.png','ipad/02-campaign.png','ipad/03-gameplay.png','ipad/04-shop.png','ipad/05-leaderboard.png'];
-const target=window.opener||window.parent;
-(async()=>{for(const n of files){const buf=await (await fetch(n)).arrayBuffer();target.postMessage({name:n,buf},'*',[buf]);}target.postMessage({done:true},'*');})();
-</script>
