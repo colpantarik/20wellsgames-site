@@ -62,8 +62,9 @@ def tuft(x, y):
 
 
 far, mid, near, occ_far, occ_mid = [], [], [], [], []
+SPEED = 0.5  # intro runs at half the original timings
 def P(layer, d, cls, t, dur):
-    layer.append(f'      <path pathLength="1" class="{cls}" style="--t:{t}s;--d:{dur}s" d="{d}"/>')
+    layer.append(f'      <path pathLength="1" class="{cls}" style="--t:{t*SPEED:.2f}s;--d:{dur*SPEED:.2f}s" d="{d}"/>')
 
 def closed_below(pts, amp=1.6, bottom=560):
     stroke = line(pts, amp=amp)

@@ -57,7 +57,7 @@
     if (seen || reduced) body.classList.add('done');
     const skip = document.querySelector('.skip');
     if (skip) skip.addEventListener('click', finishIntro);
-    setTimeout(finishIntro, 13000);
+    setTimeout(finishIntro, 7200);
     window.addEventListener('scroll', function onFirstScroll() {
       if (window.scrollY > hero.offsetHeight * 0.5) { finishIntro(); window.removeEventListener('scroll', onFirstScroll); }
     }, { passive: true });
