@@ -1,7 +1,7 @@
 (function () {
   const body = document.body;
   // Flip to true the day Ringer is approved: shows App Store buttons and "out now" stamps everywhere.
-  const RINGER_LIVE = false;
+  const RINGER_LIVE = true;
   if (RINGER_LIVE) body.classList.add('live');
   document.querySelectorAll('.when-live').forEach(e => { e.hidden = !RINGER_LIVE; });
   document.querySelectorAll('.when-soon').forEach(e => { e.hidden = RINGER_LIVE; });
