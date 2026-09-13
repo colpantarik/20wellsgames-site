@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /dev/
-Sitemap: https://colpantarik.github.io/20wellsgames-site/sitemap.xml
+Sitemap: https://20wellsgames.com/sitemap.xml
