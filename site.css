@@ -10,7 +10,7 @@
   --gutter:calc(var(--frame-inner) + 10px);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--frame-inner) + env(safe-area-inset-top,0px))}
 body{
   margin:0;min-height:100vh;color:var(--chalk);
   font-family:"Gloria Hallelujah","Comic Sans MS","Chalkboard SE",cursive;
@@ -28,7 +28,10 @@ body::before{
 /* wooden frame */
 body::after{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
-  box-shadow:inset 0 0 0 var(--frame) var(--wood), inset 0 0 0 calc(var(--frame) + 4px) var(--wood-dark), inset 0 0 60px rgba(0,0,0,.45);
+  border:var(--frame) solid var(--wood);
+  border-top-width:calc(var(--frame) + env(safe-area-inset-top,0px));
+  border-bottom-width:calc(var(--frame) + env(safe-area-inset-bottom,0px));
+  box-shadow:inset 0 0 0 4px var(--wood-dark), inset 0 0 60px rgba(0,0,0,.45);
 }
 a{color:var(--chalk)}
 .chalk-text{opacity:.9}
@@ -42,7 +45,7 @@ a{color:var(--chalk)}
 /* ---------- hero ---------- */
 .hero{
   min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:6vh 20px 4vh;position:relative;z-index:1;overflow:hidden;
+  padding:calc(6vh + env(safe-area-inset-top,0px)) 20px calc(4vh + env(safe-area-inset-bottom,0px));position:relative;z-index:1;overflow:hidden;
 }
 .logo-wrap{position:relative;width:min(400px,78vw,52vh);margin-bottom:clamp(32px,8vh,72px)}
 .logo{position:relative;width:100%;height:auto;display:block;z-index:1}
@@ -272,14 +275,14 @@ footer p{margin:.4em 0}
   .road-edge{stroke-width:26;filter:none}.road-fill{stroke-width:21}.road-center{stroke-width:2.4;stroke-dasharray:12 11;filter:none}
   .panel-wrap{padding:5vh var(--gutter) 3vh}
   footer{padding-inline:var(--gutter)}
-  body::after{box-shadow:inset 0 0 0 var(--frame) var(--wood),inset 0 0 0 var(--frame-inner) var(--wood-dark),inset 0 0 24px rgba(0,0,0,.35)}
+  body::after{box-shadow:inset 0 0 0 4px var(--wood-dark),inset 0 0 24px rgba(0,0,0,.35)}
   .about-body{gap:12px}
   .lb-table tr{grid-template-columns:34px 1fr 72px;gap:6px}
   .lb-table .lb-level,.lb-table .lb-hooks{display:none}
   .lb-table tr{grid-template-columns:34px 1fr 72px;gap:6px}
   .shots{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding:3vh var(--gutter);scroll-snap-type:x mandatory}
   .shots figure{flex:0 0 62vw;scroll-snap-align:center}
-  .topbar{padding-top:calc(var(--frame) + 10px)}
+  .topbar{padding-top:calc(var(--frame) + 10px + env(safe-area-inset-top,0px))}
 }
 
 [hidden]{display:none!important}
@@ -351,4 +354,13 @@ footer p{margin:.4em 0}
   .app-icon{box-shadow:none}
   a{color:#1d1d1d}
   .notify{display:none}
+}
+
+/* phones: markers share one narrow left column, cards get the rest (was desktop's 1fr 1fr up to 720px) */
+@media (max-width:720px){
+  .milestone[data-side]{grid-template-columns:44px 1fr;gap:0 12px;align-items:start;min-height:0;padding:3vh var(--gutter) 4vh}
+  .milestone[data-side] .marker{grid-column:1;grid-row:1;width:40px;height:40px;margin-top:6px;justify-self:center}
+  .milestone[data-side] .card{grid-column:2;grid-row:1;max-width:none}
+  .milestone[data-side] .store-line{grid-column:2;justify-content:flex-start}
+  .scroll-hint{display:none}
 }
