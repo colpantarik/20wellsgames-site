@@ -1,5 +1,10 @@
 (function () {
   const body = document.body;
+  // Old links may still carry .html; show the clean path without reloading.
+  if (/\/(index|ringer|support|privacy)\.html$/.test(location.pathname) && history.replaceState) {
+    const clean = location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+    history.replaceState(null, '', clean + location.search + location.hash);
+  }
   // Flip to true the day Ringer is approved: shows App Store buttons and "out now" stamps everywhere.
   const RINGER_LIVE = true;
   if (RINGER_LIVE) body.classList.add('live');
