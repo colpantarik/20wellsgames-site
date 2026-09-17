@@ -54,8 +54,10 @@ a{color:var(--chalk)}
   fill:none;stroke:var(--chalk);stroke-linecap:round;stroke-linejoin:round;
   stroke-dasharray:1;stroke-dashoffset:1;
   animation:draw var(--d,.6s) linear var(--t,0s) forwards;
-  filter:url(#chalk-scene);
 }
+/* one filter for the whole scene, not one per path: 46 per-path filters over the
+   full 1400x640 region crashed Safari on real iPhones (out of memory) */
+.scene > g.ink{filter:url(#chalk-scene)}
 .scene mask path{fill:#000;stroke:none;animation:none;filter:none;stroke-dasharray:none;stroke-dashoffset:0;opacity:1}
 .scene .far{stroke-width:1.7;opacity:.42}
 .scene .mid{stroke-width:2.3;opacity:.58}
@@ -346,7 +348,7 @@ footer p{margin:.4em 0}
   body::before,body::after,.tray,.skip,.scroll-hint,.road,.scene{display:none!important}
   .hero{min-height:0;padding:20px}
   .logo path,.logo ellipse,.logo text,.scene path,.marker circle,.card-frame rect{animation:none!important;stroke-dashoffset:0!important;clip-path:none!important;filter:none!important}
-  .logo > g.ink{filter:none}
+  .logo > g.ink,.scene > g.ink{filter:none}
   .tagline,.nav,.card-body,.road-end,.marker text,.marker circle.dot{opacity:1!important;visibility:visible!important;transform:none!important}
   .card{background:none;border:1.5px solid #333;border-radius:14px;break-inside:avoid}
   .card-frame{display:none}
