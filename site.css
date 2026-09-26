@@ -53,7 +53,7 @@ a{color:var(--chalk)}
 .scene path{
   fill:none;stroke:var(--chalk);stroke-linecap:round;stroke-linejoin:round;
   stroke-dasharray:1;stroke-dashoffset:1;
-  animation:draw var(--d,.6s) linear var(--t,0s) forwards;
+  animation:draw var(--d,.3s) linear var(--t,0s) forwards;
 }
 /* one filter for the whole scene, not one per path: 46 per-path filters over the
    full 1400x640 region crashed Safari on real iPhones (out of memory) */
@@ -65,7 +65,7 @@ a{color:var(--chalk)}
 .logo path,.logo ellipse{
   fill:none;stroke:var(--chalk);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;
   stroke-dasharray:1;stroke-dashoffset:1;
-  animation:draw var(--d,.6s) linear var(--t,0s) forwards;
+  animation:draw var(--d,.3s) linear var(--t,0s) forwards;
   opacity:.92;
 }
 .logo > g.ink{filter:url(#chalk)}
@@ -74,14 +74,14 @@ a{color:var(--chalk)}
 .logo text{
   font-family:"Gloria Hallelujah",cursive;fill:var(--chalk);font-size:34px;text-anchor:middle;
   opacity:.94;
-  clip-path:inset(0 100% 0 0);animation:write var(--d,1s) linear var(--t,0s) forwards;
+  clip-path:inset(0 100% 0 0);animation:write var(--d,.5s) linear var(--t,0s) forwards;
 }
 .logo text.small{font-size:26px}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes write{to{clip-path:inset(0 0 0 0)}}
 
-.tagline{margin:clamp(24px,6vh,60px) 0 0;font-size:clamp(16px,2.4vw,21px);opacity:0;animation:fade .6s ease-out 5.9s forwards}
-.nav{margin-top:1.4em;display:flex;flex-wrap:wrap;justify-content:center;gap:1.4em 2.2em;opacity:0;animation:fade .6s ease-out 6.2s forwards}
+.tagline{margin:clamp(24px,6vh,60px) 0 0;font-size:clamp(16px,2.4vw,21px);opacity:0;animation:fade .3s ease-out 2.95s forwards}
+.nav{margin-top:1.4em;display:flex;flex-wrap:wrap;justify-content:center;gap:1.4em 2.2em;opacity:0;animation:fade .3s ease-out 3.1s forwards}
 .nav a{color:var(--chalk);text-decoration:none;font-size:clamp(16px,2.2vw,20px);position:relative;padding:.1em .1em}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;background:var(--chalk);opacity:.7;transform:rotate(-1.2deg)}
 .nav a:hover::after{opacity:1;transform:rotate(1deg)}
@@ -97,7 +97,7 @@ a{color:var(--chalk)}
 .skip:hover{opacity:1}
 .scroll-hint{
   position:absolute;left:50%;bottom:calc(var(--frame) + 12px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
-  text-decoration:none;font-size:26px;opacity:0;animation:bob 1.6s ease-in-out 6.8s infinite;
+  text-decoration:none;font-size:26px;opacity:0;animation:bob 1.6s ease-in-out 3.4s infinite;
 }
 @keyframes bob{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,8px);opacity:.9}}
 
