@@ -153,6 +153,10 @@ a{color:var(--chalk)}
   border:3px dashed var(--chalk-dim);border-radius:22px;opacity:.85;
 }
 
+.mystery.target svg{width:70%;height:70%;overflow:visible}
+.mystery.target circle,.mystery.target path{fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round}
+.mystery.target .bull{fill:var(--chalk)}
+
 .panel-wrap{position:relative;z-index:1;padding:clamp(40px,6vh,72px) 5vw clamp(24px,4vh,48px);max-width:900px;margin:0 auto}
 .panel{max-width:none;margin:0 auto}
 .panel .card-body{display:block}
