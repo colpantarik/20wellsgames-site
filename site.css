@@ -370,3 +370,46 @@ footer p{margin:.4em 0}
   .milestone[data-side] .store-line{grid-column:2;justify-content:flex-start}
   .scroll-hint{display:none}
 }
+
+/* ---------- roadmap decor: a well at every stop + a few coloured doodles ---------- */
+:root{--c-yellow:#f2d98b;--c-pink:#eeb3a8;--c-blue:#a9d3e6;--c-mint:#b9dfba}
+.milestone[data-side] .marker,.milestone[data-side] .card{grid-row:1}
+.decor{grid-row:1;align-self:stretch;justify-self:stretch;position:relative;pointer-events:none;min-height:100%}
+.milestone[data-side="left"] .decor{grid-column:1}
+/* doodles are laid out for a left-hand stop (outer side = left) and mirrored for right-hand stops */
+.milestone[data-side="right"] .decor{grid-column:2;transform:scaleX(-1)}
+.decor svg{position:absolute;overflow:visible}
+/* one chalk filter per drawing, on its wrapping group (never per path; see the Safari memory crash) */
+.decor g.ink{filter:url(#chalk-bb)}
+.decor path{fill:none;stroke:var(--chalk);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.85}
+.decor .roof{stroke:var(--c-pink)}
+.decor .water,.decor .blue{stroke:var(--c-blue)}
+.decor .grass,.decor .mint{stroke:var(--c-mint)}
+.decor .yellow{stroke:var(--c-yellow)}
+.decor .pink{stroke:var(--c-pink)}
+.reached .decor path{animation:draw var(--d,.45s) ease-out calc(var(--t,.4s) + var(--o,0s)) forwards}
+.decor .well{width:134px;right:calc(50% + 58px);top:50%;margin-top:-86px}
+.decor .well path{stroke-width:2.6}
+.decor .doodle{--t:.9s}
+.decor .doodle path{stroke-width:2.2}
+.decor .d-star{width:38px;left:8%;top:6%;--t:1s}
+.decor .d-birds{width:54px;left:24%;top:2%;--t:1.2s}
+.decor .d-cloud{width:64px;left:22%;top:4%;--t:1s}
+.decor .d-flowers{width:46px;left:5%;bottom:8%;--t:1.4s}
+.decor .d-shoe,.decor .d-cactus{width:50px;left:26%;bottom:4%;--t:1.6s}
+.decor .d-drops{width:26px;right:calc(50% + 204px);top:50%;margin-top:30px;--t:1.9s}
+.road-end .end-star{width:18px;height:18px;vertical-align:-2px;margin:0 .35em}
+.road-end .end-star path{fill:none;stroke-width:2.4;stroke-linejoin:round}
+.road-end .yellow{stroke:var(--c-yellow)}.road-end .pink{stroke:var(--c-pink)}
+@media (max-width:1000px){.decor .d-drops{display:none}}
+/* phones: no spare column, so just a small well perched above each card's top-right corner */
+@media (max-width:720px){
+  .milestone[data-side] .decor{position:absolute;inset:0;transform:none;grid-column:auto;grid-row:auto;min-height:0}
+  .stamp{white-space:normal}
+  .milestone[data-side] .card{min-width:0}
+  .decor .doodle{display:none}
+  .decor .well{width:52px;right:calc(var(--gutter) + 14px);left:auto;top:calc(3vh - 62px);margin-top:0}
+  .decor .well path{stroke-width:3.4}
+}
+@media (prefers-reduced-motion:reduce){.reached .decor path{animation-duration:0s!important;animation-delay:0s!important}}
+@media print{.decor,.road-end .end-star{display:none!important}}
