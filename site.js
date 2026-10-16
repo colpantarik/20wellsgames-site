@@ -1,5 +1,8 @@
 (function () {
   const body = document.body;
+  // <body> is the page's scroll container (site.css: html{overflow:hidden}), so scroll
+  // position, scroll events and the page height all come from it, not from window.
+  const scroller = body;
   // Old links may still carry .html; show the clean path without reloading.
   if (/\/(index|ringer|support|privacy)\.html$/.test(location.pathname) && history.replaceState) {
     const clean = location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
@@ -63,8 +66,8 @@
     const skip = document.querySelector('.skip');
     if (skip) skip.addEventListener('click', finishIntro);
     setTimeout(finishIntro, 3600);
-    window.addEventListener('scroll', function onFirstScroll() {
-      if (window.scrollY > hero.offsetHeight * 0.5) { finishIntro(); window.removeEventListener('scroll', onFirstScroll); }
+    scroller.addEventListener('scroll', function onFirstScroll() {
+      if (scroller.scrollTop > hero.offsetHeight * 0.5) { finishIntro(); scroller.removeEventListener('scroll', onFirstScroll); }
     }, { passive: true });
   }
 
@@ -115,9 +118,9 @@
     function update() {
       if (!totalLen) return;
       const m = roadmap.getBoundingClientRect();
-      let tipY = window.innerHeight * 0.65 - m.top;
+      let tipY = scroller.clientHeight * 0.65 - m.top;
       // at the very bottom of the page the chalk finishes the road no matter how tall the window is
-      const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      const atEnd = scroller.clientHeight + scroller.scrollTop >= scroller.scrollHeight - 2;
       if (atEnd) tipY = Math.max(tipY, endY + 1000);
       let frac = 0;
       if (tipY > 0) {
@@ -138,7 +141,7 @@
     });
 
     let ticking = false;
-    window.addEventListener('scroll', () => {
+    scroller.addEventListener('scroll', () => {
       if (ticking) return; ticking = true;
       requestAnimationFrame(() => { update(); ticking = false; });
     }, { passive: true });
